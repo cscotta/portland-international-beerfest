@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">Portland International Beerfest</string>
+    <string name="app_name">Portland International Beerfest</string>
+    <string name="searchLabel">Add</string>
+    
+    <string-array name="cities_array">
+        <item>Portland</item>
+        <item>Atlanta</item>
+        <item>Austin</item>
+        <item>Boston</item>
+        <item>Chicago</item>
+        <item>Houston</item>
+        <item>Las Vegas</item>
+        <item>Las Angeles</item>
+        <item>Miami</item>
+        <item>New York</item>
+        <item>Orange Co</item>
+        <item>Philidelphia</item>
+        <item>San Diego</item>
+        <item>Seattle</item>
+        <item>San Francisco / Bay Area</item>
+        <item>Las Angeles</item>
+        <item>Washington, D.C.</item>        
+    </string-array>
+
+	<string-array name="categories_array">
+        <item>For Sale</item>
+        <item>Antiques</item>
+        <item>Appliances</item>
+        <item>Arts + Crafts</item>
+        <item>Auto Parts</item>
+        <item>Baby + Kids</item>
+        <item>Barter</item>
+        <item>Beauty + Health</item>
+        <item>Bikes</item>
+        <item>Books</item>
+        <item>Business</item>
+        <item>CDs / DVDs / VHS</item>
+        <item>Cell Phones</item>
+        <item>Clothes + Accessories</item>
+        <item>Collectibles</item>
+        <item>Computer</item>
+        <item>Electronics</item>
+        <item>Farm + Garden</item>
+        <item>Free</item>
+        <item>Furniture</item>
+        <item>Garage Sale</item>
+        <item>General</item>
+        <item>Household</item>
+        <item>Jewelry</item>
+        <item>Materials</item>
+        <item>Motorcycles</item>
+        <item>Musical Instruments</item>
+        <item>Photo + Video</item>
+        <item>RVs</item> 
+        <item>Sporting</item>
+        <item>Tickets</item>
+        <item>Tools</item>
+        <item>Toys + Games</item>
+        <item>Wanted</item>
+        <item>Video Gaming</item>
+    </string-array>
+    
+</resources>

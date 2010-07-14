@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:stretchColumns="1">
+
+    <TableRow>
+	    <TextView
+		  android:id="@+id/query"
+		  android:padding="20dp"
+		  android:layout_column="1"
+		  android:textColor="#333333"/>
+	  
+		<ImageView
+		    android:id="@+id/delete_button"
+		    android:layout_width="59dp"
+		    android:layout_height="59dp"
+		    android:gravity="right"
+		    android:padding="10dp"
+		    android:layout_toRightOf="@id/query"
+		    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+    </TableRow>
+
+</TableLayout>
+
+

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<!-- Application Heading -->
+	<TextView 
+		android:text="@string/title"
+		android:id="@+id/AppTitle"
+		android:textSize="30dip"
+		android:textStyle="bold"
+		android:paddingTop="5dip"
+		android:shadowColor="#99222233"
+		android:shadowDx="0"
+		android:shadowDy="0"
+		android:shadowRadius="2"
+		android:paddingLeft="5dip"
+		android:textColor="#fcfcfc"
+		android:background="@drawable/title_gradient"
+		android:layout_width="fill_parent"
+		android:layout_height="55dp">
+	</TextView>
+	
+	<TextView 
+		android:id="@+id/Divider"
+		android:textSize="2dip"
+		android:layout_below="@id/AppTitle"
+		android:background="@drawable/title_cap"
+		android:layout_width="fill_parent"
+		android:layout_height="3dip">
+	</TextView>
+	
+		<!-- Main Content -->
+		<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:id="@+id/NoSavedSearches"
+			android:orientation="vertical"
+			android:background="@drawable/searchbg">
+		
+		    <TextView
+		        android:id="@+id/label"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+				android:layout_marginTop="10dip"
+				android:layout_marginLeft="10dip"
+				android:textStyle="bold"
+				android:shadowColor="#33222233"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:shadowRadius="2"
+				android:focusable="true"
+				android:textSize="16dip"
+				android:textColor="#002f3f"
+		        android:text="What are you looking for?"/>
+		
+		    <EditText
+		        android:id="@+id/search_input"
+		        android:layout_width="233dip"
+		        android:layout_height="40dip"
+		        android:layout_marginLeft="10dip"
+				android:textColor="#222229"
+				android:inputType="textAutoCorrect"
+				android:background="@android:drawable/editbox_background"
+		        android:layout_below="@id/label"/>
+		
+		    <Button
+		        android:id="@+id/search_button"
+		        android:layout_width="wrap_content"
+		        android:layout_height="42dip"
+		        android:layout_below="@id/label"
+		        android:layout_toRightOf="@id/search_input"
+		        android:layout_marginLeft="10dip"
+		        android:text="@string/searchLabel" />
+
+		    <TextView
+		        android:id="@+id/city_label"
+		        android:layout_width="130dp"
+		        android:layout_height="wrap_content"
+				android:layout_marginTop="10dip"
+				android:layout_marginLeft="10dip"
+				android:textStyle="bold"
+				android:shadowColor="#33222233"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:shadowRadius="2"
+				android:layout_below="@id/search_input"
+				android:textSize="14dip"
+				android:textColor="#002f3f"
+		        android:text="City:"/>
+		        
+		    <TextView
+		        android:id="@+id/category_label"
+		        android:layout_width="130dip"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@id/city_label"
+				android:layout_below="@id/search_input"
+				android:layout_marginTop="10dip"
+				android:layout_marginLeft="20dip"
+				android:textStyle="bold"
+				android:shadowColor="#33222233"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:shadowRadius="2"
+				android:focusable="true"
+				android:textSize="14dip"
+				android:textColor="#002f3f"
+		        android:text="Category:"/>
+        		
+        	<Spinner android:id="@+id/city_selector"
+        		android:layout_width="130dp"
+        		android:layout_below="@id/city_label"
+        		android:layout_marginTop="5dip"
+        		android:layout_marginLeft="10dip"
+        		android:textSize="10dip"
+        		android:layout_height="40dip"/>
+        		
+
+			<Spinner android:id="@+id/category_selector"
+        		android:layout_width="130dp"
+        		android:layout_below="@id/category_label"
+        		android:layout_toRightOf="@id/city_selector"
+        		android:layout_marginTop="5dip"
+        		android:textSize="10dip"
+        		android:layout_marginLeft="20dip"
+        		android:layout_height="40dip"/>
+
+			<TextView 
+				android:id="@+id/Divider"
+				android:textSize="2dip"
+				android:layout_below="@id/city_selector"
+				android:background="@drawable/title_gradient"
+				android:layout_width="fill_parent"
+				android:layout_marginTop="10dip"
+				android:layout_marginBottom="0dip"
+				android:fadingEdge="none"
+				android:layout_height="3dip">
+			</TextView>
+	
+			<ListView android:id="@+id/SearchListView"
+  				android:layout_width="wrap_content"
+  				android:layout_height="fill_parent" 
+  				android:background="@drawable/searchbg_light"
+  				android:textColor="#222229"
+  				android:cacheColorHint="#00000000"
+  				android:divider="#333333"
+  				android:fadingEdge="none"
+  				android:layout_below="@id/Divider" />
+  			
+  			<TextView 
+				android:id="@+id/LowerDivider"
+				android:textSize="2dip"
+				android:fadingEdge="none"
+				android:layout_below="@id/SearchListView"
+				android:background="@drawable/title_gradient"
+				android:layout_width="fill_parent"
+				android:layout_height="3dip">
+			</TextView>
+  				
+		</RelativeLayout>
+
+
+</LinearLayout>

@@ -13,14 +13,18 @@ import android.util.Log;
 // Provides an interface to the local SQLite database.
 public class BeerDBAdapter {
 	
-	private static final String DATABASE_NAME = "searchList.db";
-	private static final String DATABASE_TABLE = "searchItems";
-	private static final int DATABASE_VERSION = 2;
+	private static final String DATABASE_NAME = "beer.db";
+	private static final String DATABASE_TABLE = "beer";
+	private static final int DATABASE_VERSION = 4;
  
 	public static final String KEY_ID = "_id";
-	public static final String KEY_QUERY = "query";
-	public static final String KEY_CITY = "city";
-	public static final String KEY_CATEGORY = "category";
+	public static final String KEY_NAME = "name";
+	public static final String KEY_BEER_TYPE = "beer_type";
+	public static final String KEY_STYLE = "style";
+	public static final String KEY_ABV = "abv";
+	public static final String KEY_IBU = "ibu";
+	public static final String KEY_COUNTRY = "country";
+	public static final String KEY_SERVING = "serving";
   
 	private SQLiteDatabase db;
   	private final Context context;
@@ -50,9 +54,9 @@ public class BeerDBAdapter {
   		ContentValues newQueryValues = new ContentValues();
   		
   		// Assign values for each row and insert.
-  		newQueryValues.put(KEY_QUERY, _query);
-  		newQueryValues.put(KEY_CITY, _city);
-  		newQueryValues.put(KEY_CATEGORY, _category);
+  		newQueryValues.put(KEY_NAME, _query);
+  		newQueryValues.put(KEY_BEER_TYPE, _city);
+  		newQueryValues.put(KEY_STYLE, _category);
   		
   		return db.insert(DATABASE_TABLE, null, newQueryValues);
   	}
@@ -64,35 +68,34 @@ public class BeerDBAdapter {
   	
   	// Remove a saved search based on its name.
   	public boolean removeQuery(String _query) {
-  		return db.delete(DATABASE_TABLE, KEY_QUERY + "='" + _query+ "'", null) > 0;
+  		return db.delete(DATABASE_TABLE, KEY_NAME + "='" + _query+ "'", null) > 0;
   	}
-
 
   	// Update a saved search.
   	public boolean updateQuery(long _rowIndex, String _query, String _city, String _category) {
   		ContentValues newValue = new ContentValues();
   		
-  		newValue.put(KEY_QUERY, _query);
-  		newValue.put(KEY_CITY, _city);
-  		newValue.put(KEY_CATEGORY, _category);
+  		//newValue.put(KEY_QUERY, _query);
+  		//newValue.put(KEY_CITY, _city);
+  		//newValue.put(KEY_CATEGORY, _category);
   		
   		return db.update(DATABASE_TABLE, newValue, KEY_ID + "=" + _rowIndex, null) > 0;
   	}
 
   	// Get a cursor to all items in the datastore. 
-  	public Cursor getAllSearchItemsCursor() {
+  	public Cursor getAllBeersCursor() {
   		return db.query(DATABASE_TABLE, 
-  				new String[] { KEY_ID, KEY_QUERY, KEY_CITY, KEY_CATEGORY }, 
+  				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING }, 
   				null, null, null, null, null);
   	}
 
   	// Move the cursor to a specific saved search in the table.
   	public Cursor setCursorToSearchItem(long _rowIndex) throws SQLException {
   		Cursor result = db.query(true, DATABASE_TABLE, 
-  				new String[] {KEY_ID, KEY_QUERY, KEY_CITY, KEY_CATEGORY},
+  				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING },
   				KEY_ID + "=" + _rowIndex, null, null, null, null, null);
   		if ((result.getCount() == 0) || !result.moveToFirst()) {
-  			throw new SQLException("No saved query found for row: " + _rowIndex);
+  			throw new SQLException("No beer found for row: " + _rowIndex);
   		}
   		return result;
   	}
@@ -100,13 +103,13 @@ public class BeerDBAdapter {
   	// Fetch a single search query from the datastore.
   	public String getSearchItem(long _rowIndex) throws SQLException {
   		Cursor cursor = db.query(true, DATABASE_TABLE, 
-  				new String[] {KEY_ID, KEY_QUERY, KEY_CITY, KEY_CATEGORY},
+  				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING },
   				KEY_ID + "=" + _rowIndex, null, null, null, null, null);
   		if ((cursor.getCount() == 0) || !cursor.moveToFirst()) {
-  			throw new SQLException("No saved search found for row: " + _rowIndex);
+  			throw new SQLException("No beer found for row: " + _rowIndex);
   		}
 
-  		String query = cursor.getString(cursor.getColumnIndex(KEY_QUERY));
+  		String query = cursor.getString(cursor.getColumnIndex(KEY_NAME));
   		return query;  
   	}
 
@@ -117,16 +120,12 @@ public class BeerDBAdapter {
   		}
 
   		// SQL Statement to create a new database.
-  		private static final String DATABASE_CREATE = "create table " + 
-  			DATABASE_TABLE + " (" + 
-  			KEY_ID + " integer primary key autoincrement, " +
-  			KEY_QUERY + " text not null, " + 
-  			KEY_CITY + " text not null, " +
-  			KEY_CATEGORY + " text not null);";
-
   		@Override
   		public void onCreate(SQLiteDatabase _db) {
-  			_db.execSQL(DATABASE_CREATE);
+  			Log.w("BEERFEST", "CALLED POPULATE DB");
+  			for (String statement : BeerDBSQL.POPULATE_DB) {
+  				_db.execSQL(statement);
+  			}
   		}
 
   		@Override
@@ -134,7 +133,7 @@ public class BeerDBAdapter {
   			Log.w("QueryDBAdapter", "Upgrading from version " + 
   					_oldVersion + " to " +
   					_newVersion + ", which will destroy all old data");
-
+  			
   			// Drop the old table and create a new one.
   			_db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
   			onCreate(_db);

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title">Portland International Beerfest</string>
-    <string name="app_name">Portland International Beerfest</string>
+    <string name="title">PDX Beerfest</string>
+    <string name="app_name">PDX Beerfest</string>
     <string name="searchLabel">Add</string>
     
-    <string-array name="cities_array">
+    <string-array name="beer_types_array">
         <item>Portland</item>
         <item>Atlanta</item>
         <item>Austin</item>
@@ -24,7 +24,7 @@
         <item>Washington, D.C.</item>        
     </string-array>
 
-	<string-array name="categories_array">
+	<string-array name="beer_styles_array">
         <item>For Sale</item>
         <item>Antiques</item>
         <item>Appliances</item>

@@ -1,41 +1,41 @@
 package com.cscotta.portlandintlbeerfest;
 
 public class Beer {    
-	String query;
-	String category;
-	String city;
+	String name;
+	String type;
+	String style;
 
-	// Simple POJO for wrapping up all info about a saved search.
-	public Beer(String _query, String _city, String _category) {
-		query = _query;
-		city = _city;
-		category = _category; 
+	// Simple POJO for wrapping up all info about a beer.
+	public Beer(String _name, String _type, String _style) {
+		name = _name;
+		style = _type;
+		type = _style; 
 	}
 	
 	// Getters
-	public String getQuery() {
-		return this.query;
+	public String getName() {
+		return this.name;
 	}
 
-	public String getCity() {
-		return this.city;
+	public String getType() {
+		return this.style;
 	}
 	
-	public String getCategory() {
-		return this.category;
+	public String getStyle() {
+		return this.type;
 	}
 	
 	// Setters
-	public void setQuery(String query) {
-		this.query = query;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setCategory(String category) {
-		this.category= category;
+	public void setType(String type) {
+		this.type = type;
 	}
 	
-	public void setCity(String city) {
-		this.city= city;
+	public void setStyle(String style) {
+		this.style = style;
 	}
 	
 }

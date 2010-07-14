@@ -6,6 +6,22 @@
 	android:orientation="vertical">
 
 	<!-- Application Heading -->
+	
+	<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="55dp"
+			android:id="@+id/Title"
+			android:orientation="vertical"
+			android:background="@drawable/title_gradient">
+	
+	<ImageView
+		    android:id="@+id/beer_image"
+		    android:layout_width="70dp"
+		    android:layout_height="70dp"
+		    android:gravity="left"
+		    android:padding="5dp"
+		    android:src="@drawable/beer_icon" />
+	
 	<TextView 
 		android:text="@string/title"
 		android:id="@+id/AppTitle"
@@ -14,14 +30,15 @@
 		android:paddingTop="5dip"
 		android:shadowColor="#99222233"
 		android:shadowDx="0"
+		android:gravity="left"
+		android:layout_toRightOf="@id/beer_image"
 		android:shadowDy="0"
 		android:shadowRadius="2"
-		android:paddingLeft="5dip"
 		android:textColor="#fcfcfc"
-		android:background="@drawable/title_gradient"
 		android:layout_width="fill_parent"
 		android:layout_height="55dp">
 	</TextView>
+	</RelativeLayout>
 	
 	<TextView 
 		android:id="@+id/Divider"

@@ -22,12 +22,12 @@ import android.view.View;
 
 public class PortlandBeerfest extends Activity {
 	Cursor searchCursor;
-	BeerDBAdapter searchDBAdapter;
-	private BeerAdapter savedSearchAdapter;
-	final ArrayList<Beer> savedSearches = new ArrayList<Beer>();
+	BeerDBAdapter beerDBAdapter;
+	private BeerAdapter beerListAdapter;
+	final ArrayList<Beer> beers = new ArrayList<Beer>();
 	
-	String currentCity = "Portland";
-	String currentCategory = "For Sale";
+	String currentBeerType = "Ale";
+	String currentBeerStyle = "IPA";
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,15 +35,15 @@ public class PortlandBeerfest extends Activity {
         setContentView(R.layout.main);
         
         // Initialize the user's list of saved searches.
-    	ListView savedSearchListView = (ListView) findViewById(R.id.SearchListView);
+    	ListView beerListView = (ListView) findViewById(R.id.SearchListView);
         
         int resID = R.layout.savedsearch_item;
-        savedSearchAdapter = new BeerAdapter(this, resID, savedSearches, PortlandBeerfest.this);
-        savedSearchListView.setAdapter(savedSearchAdapter);
+        beerListAdapter = new BeerAdapter(this, resID, beers, PortlandBeerfest.this);
+        beerListView.setAdapter(beerListAdapter);
         
-        searchDBAdapter = new BeerDBAdapter(this);
-        searchDBAdapter.open();
-        populateSearchList();
+        beerDBAdapter = new BeerDBAdapter(this);
+        beerDBAdapter.open();
+        populateBeerList();
         
         // Bind event for adding to the list of Saved Searches via keypad or "Enter" button.
         final EditText searchInput = (EditText) findViewById(R.id.search_input);
@@ -51,7 +51,7 @@ public class PortlandBeerfest extends Activity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
               if (event.getAction() == KeyEvent.ACTION_DOWN)
                 if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
-                	addSearchToList(searchInput, savedSearchAdapter);
+                	addToFavoriteList(searchInput, beerListAdapter);
                 	return true;
                 }
               return false;
@@ -62,53 +62,53 @@ public class PortlandBeerfest extends Activity {
         final Button searchButton = (Button) findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	addSearchToList(searchInput, savedSearchAdapter);
+            	addToFavoriteList(searchInput, beerListAdapter);
             }
         });
     
         // Populate the City selector with the list of supported cities.
-        Spinner citySpinner = (Spinner) findViewById(R.id.city_selector);
-        ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
-        		this, R.array.cities_array, android.R.layout.simple_spinner_item);
-        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(cityAdapter);
+        Spinner beerTypeSpinner = (Spinner) findViewById(R.id.city_selector);
+        ArrayAdapter<CharSequence> beerTypeAdapter = ArrayAdapter.createFromResource(
+        		this, R.array.beer_types_array, android.R.layout.simple_spinner_item);
+        beerTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        beerTypeSpinner.setAdapter(beerTypeAdapter);
         
         // Populate the Category selector with the list of supported categories.
-        Spinner categorySpinner = (Spinner) findViewById(R.id.category_selector);
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
-        		this, R.array.categories_array, android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(categoryAdapter);
+        Spinner beerStyleSpinner = (Spinner) findViewById(R.id.category_selector);
+        ArrayAdapter<CharSequence> beerStyleAdapter = ArrayAdapter.createFromResource(
+        		this, R.array.beer_styles_array, android.R.layout.simple_spinner_item);
+        beerStyleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        beerStyleSpinner.setAdapter(beerStyleAdapter);
         
         // Update the current city when the user selects one from the picker.
-        class CitySpinnerListener implements OnItemSelectedListener {
+        class BeerTypeSpinnerListener implements OnItemSelectedListener {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            	currentCity = parent.getItemAtPosition(pos).toString();
+            	currentBeerType = parent.getItemAtPosition(pos).toString();
             }
 
-            @SuppressWarnings("rawtypes")
+            @SuppressWarnings({ "unchecked" })
 			public void onNothingSelected(AdapterView parent) { }
         }
         
         // Update the current category when the user selects one from the picker.
-        class CategorySpinnerListener implements OnItemSelectedListener {
+        class BeerStyleListener implements OnItemSelectedListener {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            	currentCategory = parent.getItemAtPosition(pos).toString();
+            	currentBeerStyle = parent.getItemAtPosition(pos).toString();
             }
 
-            @SuppressWarnings("rawtypes")
+            @SuppressWarnings("unchecked")
 			public void onNothingSelected(AdapterView parent) { }
         }
         
         // Bind listeners for changes in the category picker.
-        citySpinner.setOnItemSelectedListener(new CitySpinnerListener());
-        categorySpinner.setOnItemSelectedListener(new CategorySpinnerListener());
+        beerTypeSpinner.setOnItemSelectedListener(new BeerTypeSpinnerListener());
+        beerStyleSpinner.setOnItemSelectedListener(new BeerStyleListener());
 
     }
     
     // Get all the saved searches from the database.
-    private void populateSearchList() {
-    	searchCursor = searchDBAdapter.getAllSearchItemsCursor();
+    private void populateBeerList() {
+    	searchCursor = beerDBAdapter.getAllBeersCursor();
         startManagingCursor(searchCursor);
         updateArray();
     }
@@ -116,51 +116,41 @@ public class PortlandBeerfest extends Activity {
     // Refresh the list of saved searches displayed on the screen.
     private void updateArray() {
     	searchCursor.requery();
-    	savedSearches.clear();
-  	    
+    	beers.clear();
+
   	  	if (searchCursor.moveToFirst())
   	  		do { 
-  	  			String query = searchCursor.getString(searchCursor.getColumnIndex("query"));
-  	  			String city = searchCursor.getString(searchCursor.getColumnIndex("city"));
-  	  			String category = searchCursor.getString(searchCursor.getColumnIndex("category"));
+  	  			String name = searchCursor.getString(searchCursor.getColumnIndex("name"));
+  	  			String type = searchCursor.getString(searchCursor.getColumnIndex("beer_type"));
+  	  			String style = searchCursor.getString(searchCursor.getColumnIndex("style"));
   	  			
-  	  			Beer savedSearch = new Beer(query, city, category);
-  	  			savedSearches.add(0, savedSearch);
+  	  			Beer beer = new Beer(name, type, style);
+  	  			beers.add(0, beer);
   	  		} while (searchCursor.moveToNext());
   	  
-  	  	savedSearchAdapter.notifyDataSetChanged();
+  	  	beerListAdapter.notifyDataSetChanged();
   	}
     
     // Adds an item to the list of Saved Searches.
-    private void addSearchToList(EditText searchInput, ArrayAdapter<Beer> savedSearchAdapter) {
+    private void addToFavoriteList(EditText searchInput, ArrayAdapter<Beer> savedSearchAdapter) {
     	String query = searchInput.getText().toString();
     	
-    	String apid = BeerfestUtils.getOrSetApid("get", null, getApplicationContext());
-    	
-    	if (!query.equals("") && apid != null) {
-    		searchDBAdapter.insertQuery(query, BeerfestUtils.getCitySubdomain(currentCity), 
-    				BeerfestUtils.getCategorySlug(currentCategory));
+    	if (!query.equals("")) {
+    		beerDBAdapter.insertQuery(query, currentBeerType, currentBeerStyle);
             updateArray();
         	searchInput.setText("");
         	hideKeyboard();
-    	} else if (apid == null) {
-    		showToast("Please wait a moment for your device to register with Urban Airship.");
     	} else {
     		showToast("Please type a search term before clicking 'Add'.");
     	}
     }
 
     // Delete a saved search from the database.
-    public void removeQuery(String query) {
-    	showToast("Removing your notification for '" + query + "' - just a moment.");
-    	String apid = BeerfestUtils.getOrSetApid("get", null, getApplicationContext());
+    public void removeFromFavorites(String query) {
+    	showToast("Removing your favorite: '" + query + "' - just a moment.");
     	
-    	if (apid != null) {
-    		searchDBAdapter.removeQuery(query);
+    		beerDBAdapter.removeQuery(query);
     		updateArray();
-    	} else {
-    		showToast("Please wait a moment for your device to register for Push Notifications.");
-    	}    	
     }
     
     // Hide the Keyboard.

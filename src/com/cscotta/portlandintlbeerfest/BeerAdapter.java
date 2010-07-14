@@ -32,7 +32,7 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
 	public View getView(final int position, View convertView, final ViewGroup parent) {
 		LinearLayout searchView;
 		
-	    final Beer query = getItem(position);
+	    final Beer beer = getItem(position);
 
 	    // Inflate the view from the XML layout.
 		if (convertView == null) {
@@ -48,7 +48,7 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
 	    final TextView queryView = (TextView) searchView.findViewById(R.id.query);
 	    ImageView deleteButton = (ImageView) searchView.findViewById(R.id.delete_button);
 	      
-	    queryView.setText(query.getQuery());
+	    queryView.setText(beer.getName());
 		
 	    // Alternate the background color with each row.
 	    if (position % 2 == 0) {
@@ -62,19 +62,19 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
 	    // Add a listener to the delete button to remove a saved search.
 	    deleteButton.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
-	    		activity.removeQuery(query.getQuery());
+	    		activity.removeFromFavorites(beer.getName());
             }
         });
 	    
 	    // Add a listener to the search text to view search results.
 	    queryView.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
-	    		String urlQuery = query.getQuery();
-	    		try { urlQuery = URLEncoder.encode(query.getQuery(), "UTF-8"); }
+	    		String urlQuery = beer.getName();
+	    		try { urlQuery = URLEncoder.encode(beer.getName(), "UTF-8"); }
 	    		catch (UnsupportedEncodingException e) { }
 	    		
-	    		Uri uri = Uri.parse("http://" + query.getCity() + ".craigslist.org/search/?catAbb=" + 
-	    				query.getCategory()  + "&query=" + urlQuery);
+	    		Uri uri = Uri.parse("http://" + beer.getType() + ".craigslist.org/search/?catAbb=" + 
+	    				beer.getStyle()  + "&query=" + urlQuery);
 	    		Intent myIntent = new Intent(Intent.ACTION_VIEW, uri); 
 	    		activity.startActivity(myIntent);
 	    	}

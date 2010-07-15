@@ -49,30 +49,6 @@ public class BeerDBAdapter {
   			db = dbHelper.getReadableDatabase();
   		}
   	}  
-  
-  	// Insert a new saved search into the database.
-  	public long insertQuery(String _query, String _city, String _category) {
-  		
-  		// Create a new row of values to insert.
-  		ContentValues newQueryValues = new ContentValues();
-  		
-  		// Assign values for each row and insert.
-  		newQueryValues.put(KEY_NAME, _query);
-  		newQueryValues.put(KEY_BEER_TYPE, _city);
-  		newQueryValues.put(KEY_STYLE, _category);
-  		
-  		return db.insert(DATABASE_TABLE, null, newQueryValues);
-  	}
-
-  	// Remove a saved search based on its index.
-  	public boolean removeQuery(long _rowIndex) {
-  		return db.delete(DATABASE_TABLE, KEY_ID + "=" + _rowIndex, null) > 0;
-  	}
-  	
-  	// Remove a saved search based on its name.
-  	public boolean removeQuery(String _query) {
-  		return db.delete(DATABASE_TABLE, KEY_NAME + "='" + _query+ "'", null) > 0;
-  	}
 
   	// Update a saved search.
   	public boolean updateQuery(long _rowIndex, String _query, String _city, String _category) {
@@ -136,17 +112,31 @@ public class BeerDBAdapter {
   		return result;
   	}
 
-  	// Fetch a single search query from the datastore.
-  	public String getSearchItem(long _rowIndex) throws SQLException {
+  	// Fetch a beer from the datastore.
+  	public Beer getBeer(Integer beerID) throws SQLException {
   		Cursor cursor = db.query(true, DATABASE_TABLE, 
   				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING, KEY_FAVORITE, KEY_DESCRIPTION, KEY_LINK },
-  				KEY_ID + "=" + _rowIndex, null, null, null, null, null);
+  				KEY_ID + "=" + beerID, null, null, null, null, null);
+  		
   		if ((cursor.getCount() == 0) || !cursor.moveToFirst()) {
-  			throw new SQLException("No beer found for row: " + _rowIndex);
+  			throw new SQLException("No beer found for row: " + beerID);
   		}
 
-  		String query = cursor.getString(cursor.getColumnIndex(KEY_NAME));
-  		return query;  
+  		Integer id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+  		String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+  		String type = cursor.getString(cursor.getColumnIndex(KEY_BEER_TYPE));
+  		String style = cursor.getString(cursor.getColumnIndex(KEY_STYLE));
+  		String abv = cursor.getString(cursor.getColumnIndex(KEY_ABV));
+  		Integer ibu = cursor.getInt(cursor.getColumnIndex(KEY_IBU));
+  		String country = cursor.getString(cursor.getColumnIndex(KEY_COUNTRY));
+  		String serving = cursor.getString(cursor.getColumnIndex(KEY_SERVING));
+  		Integer favorite = cursor.getInt(cursor.getColumnIndex(KEY_FAVORITE));
+  		String desc = cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION));
+  		String link = cursor.getString(cursor.getColumnIndex(KEY_LINK));
+  		
+  		Beer beer = new Beer(id, name, type, style, abv, ibu, country, serving, favorite, desc, link);
+  		
+  		return beer;  
   	}
 
   	private static class searchDBOpenHelper extends SQLiteOpenHelper {

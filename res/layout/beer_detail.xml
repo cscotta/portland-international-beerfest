@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<!-- Application Heading -->
+
+	<RelativeLayout android:layout_width="fill_parent"
+		android:layout_height="55dp" android:id="@+id/Title"
+		android:orientation="vertical" android:background="@drawable/title_gradient">
+
+		<ImageView android:id="@+id/beer_image"
+			android:layout_width="70dp" android:layout_height="70dp"
+			android:gravity="left" android:padding="5dp" android:src="@drawable/beer_icon" />
+
+		<TextView android:text="@string/title" android:id="@+id/AppTitle"
+			android:textSize="30dip" android:textStyle="bold" android:paddingTop="5dip"
+			android:shadowColor="#99222233" android:shadowDx="0" android:gravity="left"
+			android:layout_toRightOf="@id/beer_image" android:shadowDy="0"
+			android:shadowRadius="2" android:textColor="#fcfcfc"
+			android:layout_width="fill_parent" android:layout_height="55dp">
+		</TextView>
+	</RelativeLayout>
+
+	<TextView android:id="@+id/Divider" android:textSize="2dip"
+		android:layout_below="@id/AppTitle" android:background="@drawable/title_cap"
+		android:layout_width="fill_parent" android:layout_height="3dip">
+	</TextView>
+
+	<!-- Main Content -->
+	<ScrollView android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:id="@+id/detail_scroll_view">
+
+		<RelativeLayout android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:id="@+id/NoSavedSearches"
+			android:orientation="vertical" android:background="@drawable/searchbg">
+
+			<TextView android:id="@+id/beer_name" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="10dip"
+				android:layout_marginLeft="10dip" android:textStyle="bold"
+				android:shadowColor="#33222233" android:shadowDx="0"
+				android:shadowDy="0" android:shadowRadius="2" android:layout_below="@id/NoSavedSearches"
+				android:textSize="24dip" android:textColor="#002f3f" android:text="" />
+
+			<TextView android:id="@+id/rundown_label"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="10dip" android:layout_marginLeft="10dip"
+				android:textStyle="bold" android:shadowColor="#33222233"
+				android:shadowDx="0" android:shadowDy="0" android:shadowRadius="2"
+				android:layout_below="@id/beer_name" android:textSize="20dip"
+				android:textColor="#002f3f" android:text="The Rundown -" />
+
+			<TextView android:id="@+id/beer_type" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="10dip"
+				android:layout_marginLeft="10dip" android:textStyle="bold"
+				android:shadowColor="#33222233" android:shadowDx="0"
+				android:shadowDy="0" android:shadowRadius="2" android:layout_below="@id/rundown_label"
+				android:textSize="16dip" android:textColor="#002f3f" android:text="Type: " />
+
+			<TextView android:id="@+id/beer_style" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="10dip"
+				android:layout_marginLeft="10dip" android:textStyle="bold"
+				android:shadowColor="#33222233" android:shadowDx="0"
+				android:shadowDy="0" android:shadowRadius="2" android:layout_below="@id/beer_type"
+				android:textSize="16dip" android:textColor="#002f3f" android:text="Style: " />
+
+			<TextView android:id="@+id/beer_abv" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="10dip"
+				android:layout_marginLeft="10dip" android:textStyle="bold"
+				android:shadowColor="#33222233" android:shadowDx="0"
+				android:shadowDy="0" android:shadowRadius="2" android:layout_below="@id/beer_style"
+				android:textSize="16dip" android:textColor="#002f3f" android:text="ABV: " />
+
+			<TextView android:id="@+id/beer_ibu" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="10dip"
+				android:layout_marginLeft="10dip" android:textStyle="bold"
+				android:shadowColor="#33222233" android:shadowDx="0"
+				android:shadowDy="0" android:shadowRadius="2" android:layout_below="@id/beer_abv"
+				android:textSize="16dip" android:textColor="#002f3f" android:text="IBU: " />
+
+
+			<TextView android:id="@+id/beer_country"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="10dip" android:layout_marginLeft="10dip"
+				android:textStyle="bold" android:shadowColor="#33222233"
+				android:shadowDx="0" android:shadowDy="0" android:shadowRadius="2"
+				android:layout_below="@id/beer_ibu" android:textSize="16dip"
+				android:textColor="#002f3f" android:text="Country: " />
+
+
+			<TextView android:id="@+id/beer_serving"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="10dip" android:layout_marginLeft="10dip"
+				android:textStyle="bold" android:shadowColor="#33222233"
+				android:shadowDx="0" android:shadowDy="0" android:shadowRadius="2"
+				android:layout_below="@id/beer_country" android:textSize="16dip"
+				android:textColor="#002f3f" android:text="Serving: " />
+
+			<TextView android:id="@+id/beer_description"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:layout_marginTop="10dip" android:layout_marginLeft="10dip"
+				android:shadowColor="#33222233" android:shadowDx="0"
+				android:shadowDy="0" android:shadowRadius="2"
+				android:layout_below="@id/beer_serving" android:textSize="16dip"
+				android:textColor="#002f3f" android:text="" />
+
+		</RelativeLayout>
+	</ScrollView>
+
+
+</LinearLayout>

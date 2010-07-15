@@ -66,11 +66,11 @@ public class Beer {
 	}
 	
 	public String getCountry() {
-		return this.getCountry();
+		return this.country;
 	}
 	
 	public String getServing() {
-		return this.getServing();
+		return this.serving;
 	}
 	
 	public Boolean getFavorite() {

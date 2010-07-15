@@ -1,12 +1,9 @@
 package com.cscotta.portlandintlbeerfest;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,14 +68,10 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
 	    // Add a listener to the beer text to view details.
 	    queryView.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
-	    		String urlQuery = beer.getName();
-	    		try { urlQuery = URLEncoder.encode(beer.getName(), "UTF-8"); }
-	    		catch (UnsupportedEncodingException e) { }
-	    		
-	    		Uri uri = Uri.parse("http://" + beer.getType() + ".craigslist.org/search/?catAbb=" + 
-	    				beer.getStyle()  + "&query=" + urlQuery);
-	    		Intent myIntent = new Intent(Intent.ACTION_VIEW, uri); 
-	    		activity.startActivity(myIntent);
+	    		Intent launchDetail = new Intent();
+	    		launchDetail.setClassName("com.cscotta.portlandintlbeerfest", "com.cscotta.portlandintlbeerfest.BeerDetail");
+	    		launchDetail.putExtra("com.cscotta.portlandintlbeerfest.beerID", beer.getID().toString());
+	    		activity.startActivity(launchDetail);	    		
 	    	}
 	    });
 	    

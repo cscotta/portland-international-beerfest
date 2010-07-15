@@ -91,7 +91,6 @@ public class PortlandBeerfest extends Activity {
     
     // Get all the saved searches from the database.
     private void populateBeerList() {
-    	
     	final CheckBox onlyFavorites = (CheckBox) findViewById(R.id.favorites_checkbox);
     	String typeFilter = null;
     	String countryFilter = null;
@@ -131,21 +130,6 @@ public class PortlandBeerfest extends Activity {
     	beerDBAdapter.setFavorite(id, favorite);
     	String addedOrRemoved = (favorite ? "added to" : "removed from");
     	showToast(name + " has been " + addedOrRemoved + " your favorites.");
-    }
-
-    // Delete a saved search from the database.
-    public void removeFromFavorites(String query) {
-    	showToast("Removing your favorite: '" + query + "' - just a moment.");
-    	
-    		beerDBAdapter.removeQuery(query);
-    		updateArray();
-    }
-    
-    // Hide the Keyboard.
-    private void hideKeyboard() {
-    	//final EditText searchInput = (EditText) findViewById(R.id.search_input);
-    	//InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    	//inputManager.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
     }
     
     // Toss up a toast!

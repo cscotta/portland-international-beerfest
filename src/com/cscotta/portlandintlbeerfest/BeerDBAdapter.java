@@ -15,7 +15,7 @@ public class BeerDBAdapter {
 	
 	private static final String DATABASE_NAME = "beer.db";
 	private static final String DATABASE_TABLE = "beer";
-	private static final int DATABASE_VERSION = 11;
+	private static final int DATABASE_VERSION = 12;
  
 	public static final String KEY_ID = "_id";
 	public static final String KEY_NAME = "name";
@@ -79,7 +79,7 @@ public class BeerDBAdapter {
   		String countryCondition = null;
   		
   		if (onlyFavorites) faveCondition = KEY_FAVORITE + "=" + "1";
-  		if (type != null) typeCondition = KEY_BEER_TYPE + "= '" + type + "'";
+  		if (type != null) typeCondition = KEY_STYLE + "= '" + type + "'";
   		if (country != null) countryCondition = KEY_COUNTRY + "= '" + country + "'";
   		
   		// Apply filtering conditions.

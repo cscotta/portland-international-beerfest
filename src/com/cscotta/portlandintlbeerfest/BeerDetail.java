@@ -43,15 +43,16 @@ public class BeerDetail extends Activity {
         	beerIbu.setText(beerIbu.getText() + beer.getIbu().toString());        	
 
         	TextView beerCountry = (TextView) findViewById(R.id.beer_country);
-        	beerIbu.setText(beerCountry.getText() + beer.getCountry()	);   
+        	beerCountry.setText(beerCountry.getText() + beer.getCountry()	);   
         	
         	TextView beerServing = (TextView) findViewById(R.id.beer_serving);
-        	beerIbu.setText(beerServing.getText() + beer.getServing());
+        	beerServing.setText(beerServing.getText() + beer.getServing());
         	
         	TextView beerDescription = (TextView) findViewById(R.id.beer_description);
         	beerDescription.setText(beer.getDescription());
         	
         	final CheckBox faveButton = (CheckBox) findViewById(R.id.favorites_checkbox);
+        	faveButton.setChecked(beer.getFavorite());
     	    faveButton.setOnClickListener(new View.OnClickListener() {
     	    	public void onClick(View v) {
     	    		setFavorite(beer.getID(), beer.getName(), faveButton.isChecked());

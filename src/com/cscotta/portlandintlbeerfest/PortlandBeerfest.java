@@ -89,6 +89,13 @@ public class PortlandBeerfest extends Activity {
 
     }
     
+	@Override
+	public void onResume() {
+		//showToast("Called onResume");
+		populateBeerList();
+		super.onResume();
+	}
+	
     // Get all the saved searches from the database.
     private void populateBeerList() {
     	final CheckBox onlyFavorites = (CheckBox) findViewById(R.id.favorites_checkbox);
@@ -125,7 +132,7 @@ public class PortlandBeerfest extends Activity {
   	  	beerListAdapter.notifyDataSetChanged();
   	}
     
-    // Adds an item to the list of Saved Searches.
+    // Adds a beer to the list of Favorite beers.
     void setFavorite(Integer id, String name, Boolean favorite) {
     	beerDBAdapter.setFavorite(id, favorite);
     	String addedOrRemoved = (favorite ? "added to" : "removed from");

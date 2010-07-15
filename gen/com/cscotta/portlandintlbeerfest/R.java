@@ -45,15 +45,15 @@ public final class R {
         public static final int beer_serving=0x7f07000d;
         public static final int beer_style=0x7f070009;
         public static final int beer_type=0x7f070008;
-        public static final int category_label=0x7f070010;
-        public static final int category_selector=0x7f070012;
-        public static final int city_selector=0x7f070011;
+        public static final int category_label=0x7f070011;
+        public static final int category_selector=0x7f070013;
+        public static final int city_selector=0x7f070012;
         public static final int delete_button=0x7f070017;
         public static final int detail_scroll_view=0x7f070004;
-        public static final int favorites_checkbox=0x7f070013;
+        public static final int favorites_checkbox=0x7f07000f;
         public static final int query=0x7f070016;
         public static final int rundown_label=0x7f070007;
-        public static final int type_filter_label=0x7f07000f;
+        public static final int type_filter_label=0x7f070010;
     }
     public static final class layout {
         public static final int beer_detail=0x7f030000;

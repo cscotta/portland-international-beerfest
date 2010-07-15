@@ -2,7 +2,11 @@ package com.cscotta.portlandintlbeerfest;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BeerDetail extends Activity {
 	
@@ -21,7 +25,7 @@ public class BeerDetail extends Activity {
         	String beerid = extras.getString("com.cscotta.portlandintlbeerfest.beerID");
         	Integer beerID = Integer.parseInt(beerid);
         	
-        	Beer beer = beerDBAdapter.getBeer(beerID);
+        	final Beer beer = beerDBAdapter.getBeer(beerID);
         	
         	TextView beerName = (TextView) findViewById(R.id.beer_name);
         	beerName.setText(beer.getName());
@@ -45,7 +49,27 @@ public class BeerDetail extends Activity {
         	beerIbu.setText(beerServing.getText() + beer.getServing());
         	
         	TextView beerDescription = (TextView) findViewById(R.id.beer_description);
-        	beerDescription.setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");        	
+        	beerDescription.setText(beer.getDescription());
+        	
+        	final CheckBox faveButton = (CheckBox) findViewById(R.id.favorites_checkbox);
+    	    faveButton.setOnClickListener(new View.OnClickListener() {
+    	    	public void onClick(View v) {
+    	    		setFavorite(beer.getID(), beer.getName(), faveButton.isChecked());
+                }
+            });
         }
 	}
+	
+    void setFavorite(Integer id, String name, Boolean favorite) {
+    	beerDBAdapter.setFavorite(id, favorite);
+    	String addedOrRemoved = (favorite ? "added to" : "removed from");
+    	showToast(name + " has been " + addedOrRemoved + " your favorites.");
+    }
+    
+    // Toss up a toast!
+    private void showToast(String message) {
+    	Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+    	toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
  }

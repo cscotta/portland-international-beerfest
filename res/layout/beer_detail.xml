@@ -29,12 +29,12 @@
 	</TextView>
 
 	<!-- Main Content -->
-	<ScrollView android:layout_width="fill_parent"
+	<ScrollView android:layout_width="fill_parent" android:fillViewport="true"
 		android:layout_height="fill_parent" android:id="@+id/detail_scroll_view">
 
 		<RelativeLayout android:layout_width="fill_parent"
 			android:layout_height="fill_parent" android:id="@+id/NoSavedSearches"
-			android:orientation="vertical" android:background="@drawable/searchbg">
+			android:background="@drawable/searchbg">
 
 			<TextView android:id="@+id/beer_name" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:layout_marginTop="10dip"
@@ -104,6 +104,22 @@
 				android:shadowDy="0" android:shadowRadius="2"
 				android:layout_below="@id/beer_serving" android:textSize="16dip"
 				android:textColor="#002f3f" android:text="" />
+
+
+        <CheckBox android:id="@+id/favorites_checkbox"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:textSize="14dip"
+				android:textColor="#002f3f"
+				android:textStyle="bold"
+				android:shadowColor="#33222233"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:layout_marginLeft="10dip"
+				android:shadowRadius="2"
+				android:layout_below="@id/beer_description"
+    			android:text=" Add to My Favorites" />
+
 
 		</RelativeLayout>
 	</ScrollView>

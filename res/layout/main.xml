@@ -110,7 +110,6 @@
         		android:layout_height="40dip"/>
 
 
-    <TableRow>
         <CheckBox android:id="@+id/favorites_checkbox"
     			android:layout_width="wrap_content"
     			android:layout_height="wrap_content"
@@ -123,30 +122,12 @@
 				android:layout_marginLeft="10dip"
 				android:shadowRadius="2"
 				android:layout_below="@id/category_selector"
-    			android:text=" Only My Favorites" />
-        <TextView
-            android:text="Ctrl-O"
-            android:gravity="right"
-            android:padding="3dip" />
-    </TableRow>
-
-			
-
-		    <Button
-		        android:id="@+id/search_button"
-		        android:layout_width="wrap_content"
-		        android:layout_height="42dip"
-		        android:layout_toRightOf="@id/favorites_checkbox"
-		        android:layout_below="@id/category_selector"
-		        android:layout_marginLeft="10dip"
-		        android:layout_marginTop="5dip"
-		        android:gravity="right"
-		        android:text="Filter" />
+    			android:text=" Show Only My Favorites" />
 
 			<TextView 
 				android:id="@+id/Divider"
 				android:textSize="2dip"
-				android:layout_below="@id/search_button"
+				android:layout_below="@id/favorites_checkbox"
 				android:background="@drawable/title_gradient"
 				android:layout_width="fill_parent"
 				android:layout_marginTop="10dip"

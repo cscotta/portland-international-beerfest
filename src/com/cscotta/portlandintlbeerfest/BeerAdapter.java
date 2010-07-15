@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,9 +47,10 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
 		
 		// Draw the search text and delete button.
 	    final TextView queryView = (TextView) searchView.findViewById(R.id.query);
-	    CheckBox faveButton = (CheckBox) searchView.findViewById(R.id.delete_button);
+	    final CheckBox faveButton = (CheckBox) searchView.findViewById(R.id.delete_button);
 	      
 	    queryView.setText(beer.getName());
+	    faveButton.setChecked(beer.getFavorite());
 		
 	    // Alternate the background color with each row.
 	    if (position % 2 == 0) {
@@ -60,14 +61,14 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
 	    	faveButton.setBackgroundResource(R.color.white);	    	
 	    }
 	    
-	    // Add a listener to the delete button to remove a saved search.
+	    // Add a listener to the checkbox to add/remove an item from favorites.
 	    faveButton.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
-	    		activity.removeFromFavorites(beer.getName());
+	    		activity.setFavorite(beer.getID(), beer.getName(), faveButton.isChecked());
             }
         });
 	    
-	    // Add a listener to the search text to view search results.
+	    // Add a listener to the beer text to view details.
 	    queryView.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
 	    		String urlQuery = beer.getName();

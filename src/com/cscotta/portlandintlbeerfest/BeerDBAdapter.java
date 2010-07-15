@@ -15,7 +15,7 @@ public class BeerDBAdapter {
 	
 	private static final String DATABASE_NAME = "beer.db";
 	private static final String DATABASE_TABLE = "beer";
-	private static final int DATABASE_VERSION = 6;
+	private static final int DATABASE_VERSION = 11;
  
 	public static final String KEY_ID = "_id";
 	public static final String KEY_NAME = "name";
@@ -27,6 +27,7 @@ public class BeerDBAdapter {
 	public static final String KEY_SERVING = "serving";
 	public static final String KEY_FAVORITE = "favorite";
 	public static final String KEY_DESCRIPTION = "description";
+	public static final String KEY_LINK = "link";
   
 	private SQLiteDatabase db;
   	private final Context context;
@@ -83,18 +84,51 @@ public class BeerDBAdapter {
   		
   		return db.update(DATABASE_TABLE, newValue, KEY_ID + "=" + _rowIndex, null) > 0;
   	}
+  	
+  	boolean setFavorite(Integer id, Boolean favorite) {
+  		int result = 0;
+  		if (favorite == true) result = 1;
+  		
+  		ContentValues newValue = new ContentValues();
+  		newValue.put(KEY_FAVORITE, result);
+  		return db.update(DATABASE_TABLE, newValue, KEY_ID + "=" + id, null) > 0;
+    }
+  	
 
   	// Get a cursor to all items in the datastore. 
-  	public Cursor getAllBeersCursor() {
+  	public Cursor getAllBeersCursor(Boolean onlyFavorites, String type, String country) {
+  		String conditions = null;
+  		String faveCondition = null;
+  		String typeCondition = null;
+  		String countryCondition = null;
+  		
+  		if (onlyFavorites) faveCondition = KEY_FAVORITE + "=" + "1";
+  		if (type != null) typeCondition = KEY_BEER_TYPE + "= '" + type + "'";
+  		if (country != null) countryCondition = KEY_COUNTRY + "= '" + country + "'";
+  		
+  		// Apply filtering conditions.
+  		if (faveCondition != null || typeCondition != null || countryCondition != null) {
+  			conditions = "";
+  			if (faveCondition != null) conditions = faveCondition;
+  			
+  			if (typeCondition != null) {
+  				conditions = (conditions.equals("") ? typeCondition : conditions + " AND " + typeCondition);
+  			}
+  			
+  			if (countryCondition != null) {
+  				conditions = (conditions.equals("") ? countryCondition : conditions + " AND " + countryCondition);
+  			}
+  		}
+  		
   		return db.query(DATABASE_TABLE, 
   				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING, KEY_FAVORITE, KEY_DESCRIPTION }, 
-  				null, null, null, null, null);
+  				conditions, null, null, null, "name desc");
   	}
 
   	// Move the cursor to a specific saved search in the table.
   	public Cursor setCursorToSearchItem(long _rowIndex) throws SQLException {
   		Cursor result = db.query(true, DATABASE_TABLE, 
-  				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING, KEY_FAVORITE, KEY_DESCRIPTION },
+  				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING, KEY_FAVORITE, KEY_DESCRIPTION, KEY_LINK },
   				KEY_ID + "=" + _rowIndex, null, null, null, null, null);
   		if ((result.getCount() == 0) || !result.moveToFirst()) {
   			throw new SQLException("No beer found for row: " + _rowIndex);
@@ -105,7 +139,7 @@ public class BeerDBAdapter {
   	// Fetch a single search query from the datastore.
   	public String getSearchItem(long _rowIndex) throws SQLException {
   		Cursor cursor = db.query(true, DATABASE_TABLE, 
-  				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING, KEY_FAVORITE, KEY_DESCRIPTION },
+  				new String[] { KEY_ID, KEY_NAME, KEY_BEER_TYPE, KEY_STYLE, KEY_ABV, KEY_IBU, KEY_COUNTRY, KEY_SERVING, KEY_FAVORITE, KEY_DESCRIPTION, KEY_LINK },
   				KEY_ID + "=" + _rowIndex, null, null, null, null, null);
   		if ((cursor.getCount() == 0) || !cursor.moveToFirst()) {
   			throw new SQLException("No beer found for row: " + _rowIndex);

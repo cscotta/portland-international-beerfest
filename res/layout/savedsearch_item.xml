@@ -13,14 +13,16 @@
 		  android:layout_column="1"
 		  android:textColor="#333333"/>
 	  
-		<ImageView
-		    android:id="@+id/delete_button"
-		    android:layout_width="59dp"
-		    android:layout_height="59dp"
-		    android:gravity="right"
-		    android:padding="10dp"
-		    android:layout_toRightOf="@id/query"
-		    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+	  <CheckBox android:id="@+id/delete_button"
+		  android:layout_width="59dp"
+		  android:layout_height="59dp"
+		  android:gravity="right"
+		  android:paddingTop="18dp"
+		  android:paddingBottom="0dp"
+		  android:layout_toRightOf="@id/query"
+    	  android:text="" />
+	  
+
     </TableRow>
 
 </TableLayout>

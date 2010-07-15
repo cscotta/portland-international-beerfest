@@ -9,7 +9,7 @@ package com.cscotta.portlandintlbeerfest;
 
 public final class R {
     public static final class array {
-        public static final int beer_styles_array=0x7f060001;
+        public static final int beer_countries_array=0x7f060001;
         public static final int beer_types_array=0x7f060000;
     }
     public static final class attr {
@@ -32,20 +32,19 @@ public final class R {
     public static final class id {
         public static final int AppTitle=0x7f070002;
         public static final int Divider=0x7f070003;
-        public static final int LowerDivider=0x7f07000d;
+        public static final int LowerDivider=0x7f07000c;
         public static final int NoSavedSearches=0x7f070004;
-        public static final int SearchListView=0x7f07000c;
+        public static final int SearchListView=0x7f07000b;
         public static final int Title=0x7f070000;
         public static final int beer_image=0x7f070001;
-        public static final int category_label=0x7f070009;
-        public static final int category_selector=0x7f07000b;
-        public static final int city_label=0x7f070008;
-        public static final int city_selector=0x7f07000a;
-        public static final int delete_button=0x7f07000f;
-        public static final int label=0x7f070005;
-        public static final int query=0x7f07000e;
-        public static final int search_button=0x7f070007;
-        public static final int search_input=0x7f070006;
+        public static final int category_label=0x7f070006;
+        public static final int category_selector=0x7f070008;
+        public static final int city_selector=0x7f070007;
+        public static final int delete_button=0x7f07000e;
+        public static final int favorites_checkbox=0x7f070009;
+        public static final int query=0x7f07000d;
+        public static final int search_button=0x7f07000a;
+        public static final int type_filter_label=0x7f070005;
     }
     public static final class layout {
         public static final int main=0x7f030000;

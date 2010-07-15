@@ -58,8 +58,8 @@
 			android:background="@drawable/searchbg">
 		
 		    <TextView
-		        android:id="@+id/label"
-		        android:layout_width="fill_parent"
+		        android:id="@+id/type_filter_label"
+		        android:layout_width="100dp"
 		        android:layout_height="wrap_content"
 				android:layout_marginTop="10dip"
 				android:layout_marginLeft="10dip"
@@ -68,54 +68,19 @@
 				android:shadowDx="0"
 				android:shadowDy="0"
 				android:shadowRadius="2"
-				android:focusable="true"
-				android:textSize="16dip"
-				android:textColor="#002f3f"
-		        android:text="What are you looking for?"/>
-		
-		    <EditText
-		        android:id="@+id/search_input"
-		        android:layout_width="233dip"
-		        android:layout_height="40dip"
-		        android:layout_marginLeft="10dip"
-				android:textColor="#222229"
-				android:inputType="textAutoCorrect"
-				android:background="@android:drawable/editbox_background"
-		        android:layout_below="@id/label"/>
-		
-		    <Button
-		        android:id="@+id/search_button"
-		        android:layout_width="wrap_content"
-		        android:layout_height="42dip"
-		        android:layout_below="@id/label"
-		        android:layout_toRightOf="@id/search_input"
-		        android:layout_marginLeft="10dip"
-		        android:text="@string/searchLabel" />
-
-		    <TextView
-		        android:id="@+id/city_label"
-		        android:layout_width="130dp"
-		        android:layout_height="wrap_content"
-				android:layout_marginTop="10dip"
-				android:layout_marginLeft="10dip"
-				android:textStyle="bold"
-				android:shadowColor="#33222233"
-				android:shadowDx="0"
-				android:shadowDy="0"
-				android:shadowRadius="2"
-				android:layout_below="@id/search_input"
+				android:layout_below="@id/NoSavedSearches"
 				android:textSize="14dip"
 				android:textColor="#002f3f"
-		        android:text="City:"/>
+		        android:text="Filter by Type:"/>
 		        
 		    <TextView
 		        android:id="@+id/category_label"
-		        android:layout_width="130dip"
+		        android:layout_width="100dip"
 		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@id/city_label"
-				android:layout_below="@id/search_input"
+		        android:layout_toRightOf="@id/type_filter_label"
+				android:layout_below="@id/NoSavedSearches"
 				android:layout_marginTop="10dip"
-				android:layout_marginLeft="20dip"
+				android:layout_marginLeft="50dip"
 				android:textStyle="bold"
 				android:shadowColor="#33222233"
 				android:shadowDx="0"
@@ -124,11 +89,11 @@
 				android:focusable="true"
 				android:textSize="14dip"
 				android:textColor="#002f3f"
-		        android:text="Category:"/>
+		        android:text="Country"/>
         		
         	<Spinner android:id="@+id/city_selector"
         		android:layout_width="130dp"
-        		android:layout_below="@id/city_label"
+        		android:layout_below="@id/type_filter_label"
         		android:layout_marginTop="5dip"
         		android:layout_marginLeft="10dip"
         		android:textSize="10dip"
@@ -144,10 +109,44 @@
         		android:layout_marginLeft="20dip"
         		android:layout_height="40dip"/>
 
+
+    <TableRow>
+        <CheckBox android:id="@+id/favorites_checkbox"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:textSize="14dip"
+				android:textColor="#002f3f"
+				android:textStyle="bold"
+				android:shadowColor="#33222233"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:layout_marginLeft="10dip"
+				android:shadowRadius="2"
+				android:layout_below="@id/category_selector"
+    			android:text=" Only My Favorites" />
+        <TextView
+            android:text="Ctrl-O"
+            android:gravity="right"
+            android:padding="3dip" />
+    </TableRow>
+
+			
+
+		    <Button
+		        android:id="@+id/search_button"
+		        android:layout_width="wrap_content"
+		        android:layout_height="42dip"
+		        android:layout_toRightOf="@id/favorites_checkbox"
+		        android:layout_below="@id/category_selector"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginTop="5dip"
+		        android:gravity="right"
+		        android:text="Filter" />
+
 			<TextView 
 				android:id="@+id/Divider"
 				android:textSize="2dip"
-				android:layout_below="@id/city_selector"
+				android:layout_below="@id/search_button"
 				android:background="@drawable/title_gradient"
 				android:layout_width="fill_parent"
 				android:layout_marginTop="10dip"

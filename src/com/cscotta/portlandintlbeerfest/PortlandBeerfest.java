@@ -45,24 +45,11 @@ public class PortlandBeerfest extends Activity {
         beerDBAdapter.open();
         populateBeerList();
         
-        // Bind event for adding to the list of Saved Searches via keypad or "Enter" button.
-        final EditText searchInput = (EditText) findViewById(R.id.search_input);
-        searchInput.setOnKeyListener(new OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-              if (event.getAction() == KeyEvent.ACTION_DOWN)
-                if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
-                	addToFavoriteList(searchInput, beerListAdapter);
-                	return true;
-                }
-              return false;
-            }
-          });
-        
         // Bind event for adding to the list of Saved Searches via the "Add" button.
         final Button searchButton = (Button) findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	addToFavoriteList(searchInput, beerListAdapter);
+            	// addToFavoriteList(searchInput, beerListAdapter);
             }
         });
     
@@ -76,7 +63,7 @@ public class PortlandBeerfest extends Activity {
         // Populate the Category selector with the list of supported categories.
         Spinner beerStyleSpinner = (Spinner) findViewById(R.id.category_selector);
         ArrayAdapter<CharSequence> beerStyleAdapter = ArrayAdapter.createFromResource(
-        		this, R.array.beer_styles_array, android.R.layout.simple_spinner_item);
+        		this, R.array.beer_countries_array, android.R.layout.simple_spinner_item);
         beerStyleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         beerStyleSpinner.setAdapter(beerStyleAdapter);
         
@@ -155,9 +142,9 @@ public class PortlandBeerfest extends Activity {
     
     // Hide the Keyboard.
     private void hideKeyboard() {
-    	final EditText searchInput = (EditText) findViewById(R.id.search_input);
-    	InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    	inputManager.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
+    	//final EditText searchInput = (EditText) findViewById(R.id.search_input);
+    	//InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    	//inputManager.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
     }
     
     // Toss up a toast!

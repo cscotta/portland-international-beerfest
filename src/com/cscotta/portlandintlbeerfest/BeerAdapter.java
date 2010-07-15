@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,21 +47,21 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
 		
 		// Draw the search text and delete button.
 	    final TextView queryView = (TextView) searchView.findViewById(R.id.query);
-	    ImageView deleteButton = (ImageView) searchView.findViewById(R.id.delete_button);
+	    CheckBox faveButton = (CheckBox) searchView.findViewById(R.id.delete_button);
 	      
 	    queryView.setText(beer.getName());
 		
 	    // Alternate the background color with each row.
 	    if (position % 2 == 0) {
 	    	queryView.setBackgroundResource(R.color.bluewhite);
-	    	deleteButton.setBackgroundResource(R.color.bluewhite);
+	    	faveButton.setBackgroundResource(R.color.bluewhite);
 	    } else {
 	    	queryView.setBackgroundResource(R.color.white);
-	    	deleteButton.setBackgroundResource(R.color.white);	    	
+	    	faveButton.setBackgroundResource(R.color.white);	    	
 	    }
 	    
 	    // Add a listener to the delete button to remove a saved search.
-	    deleteButton.setOnClickListener(new View.OnClickListener() {
+	    faveButton.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
 	    		activity.removeFromFavorites(beer.getName());
             }

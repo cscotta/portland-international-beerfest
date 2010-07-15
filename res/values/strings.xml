@@ -5,61 +5,63 @@
     <string name="searchLabel">Add</string>
     
     <string-array name="beer_types_array">
-        <item>Portland</item>
-        <item>Atlanta</item>
-        <item>Austin</item>
-        <item>Boston</item>
-        <item>Chicago</item>
-        <item>Houston</item>
-        <item>Las Vegas</item>
-        <item>Las Angeles</item>
-        <item>Miami</item>
-        <item>New York</item>
-        <item>Orange Co</item>
-        <item>Philidelphia</item>
-        <item>San Diego</item>
-        <item>Seattle</item>
-        <item>San Francisco / Bay Area</item>
-        <item>Las Angeles</item>
-        <item>Washington, D.C.</item>        
+       	<item>All</item>
+       	<item>Barley Wine</item>
+		<item>Bock</item>
+		<item>Brown Ales</item>
+		<item>Cider</item>
+		<item>Doppelbock</item>
+		<item>Double (Imperial) IPA</item>
+		<item>Dubbel</item>
+		<item>Dunkel Weizen</item>
+		<item>Eisbock</item>
+		<item>Export Lager</item>
+		<item>Flemish/Flanders Red</item>
+		<item>Fruit</item>
+		<item>Hefeweizen</item>
+		<item>Helles Bock / Maibock</item>
+		<item>Helles</item>
+		<item>Hybrid</item>
+		<item>Imperial Porter</item>
+		<item>Imperial Stout</item>
+		<item>India Pale Ale (IPA)</item>
+		<item>Keller Bier</item>
+		<item>Lambic</item>
+		<item>Mead</item>
+		<item>New World</item>
+		<item>Pale Ale</item>
+		<item>Pilsner</item>
+		<item>Porter</item>
+		<item>Quadrupel</item>
+		<item>Rauchbier</item>
+		<item>Saison</item>
+		<item>Schwartzbier</item>
+		<item>Scotch Ale</item>
+		<item>Strong Ale</item>
+		<item>Strong Golden</item>
+		<item>Strong Lager</item>
+		<item>Trappist</item>
+		<item>Tripel</item>
+		<item>Ur-Marzen</item>
+		<item>Winter Warmers</item>
+		<item>Wood-Aged Specialty</item>      
     </string-array>
 
-	<string-array name="beer_styles_array">
-        <item>For Sale</item>
-        <item>Antiques</item>
-        <item>Appliances</item>
-        <item>Arts + Crafts</item>
-        <item>Auto Parts</item>
-        <item>Baby + Kids</item>
-        <item>Barter</item>
-        <item>Beauty + Health</item>
-        <item>Bikes</item>
-        <item>Books</item>
-        <item>Business</item>
-        <item>CDs / DVDs / VHS</item>
-        <item>Cell Phones</item>
-        <item>Clothes + Accessories</item>
-        <item>Collectibles</item>
-        <item>Computer</item>
-        <item>Electronics</item>
-        <item>Farm + Garden</item>
-        <item>Free</item>
-        <item>Furniture</item>
-        <item>Garage Sale</item>
-        <item>General</item>
-        <item>Household</item>
-        <item>Jewelry</item>
-        <item>Materials</item>
-        <item>Motorcycles</item>
-        <item>Musical Instruments</item>
-        <item>Photo + Video</item>
-        <item>RVs</item> 
-        <item>Sporting</item>
-        <item>Tickets</item>
-        <item>Tools</item>
-        <item>Toys + Games</item>
-        <item>Wanted</item>
-        <item>Video Gaming</item>
+	<string-array name="beer_countries_array">
+        <item>All</item>
+		<item>Belgium</item>
+		<item>Canada</item>
+		<item>Czech Republic</item>
+		<item>Denmark</item>
+		<item>England</item>
+		<item>Germany</item>
+		<item>Holland</item>
+		<item>Italy</item>
+		<item>Japan</item>
+		<item>New Zealand</item>
+		<item>Norway</item>
+		<item>Poland</item>
+		<item>USA</item>
     </string-array>
     
 </resources>
